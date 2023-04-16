@@ -3,7 +3,6 @@ from transformers import pipeline
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 import uvicorn
-import os
 
 # specify chat server
 HOST = 'localhost'
@@ -12,12 +11,10 @@ URL = f'http://{HOST}:{PORT}'
 
 model_name = "databricks/dolly-v2-12b"
 
-current_path = os.path.dirname(os.path.abspath(__file__))
 instruct_pipeline = pipeline(model=model_name,
                              torch_dtype=torch.bfloat16,
                              trust_remote_code=True,
                              device_map="auto")
-
 
 app = FastAPI()
 
@@ -72,7 +69,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
